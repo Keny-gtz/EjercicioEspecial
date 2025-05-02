@@ -7,7 +7,7 @@ function getProducts() {
   fetch(URLMain)
     .then((response) => response.json())
     .then((products) => {
-      const producto = products.slice(0, 9);
+      const producto = products.slice(0, 9);//elige los primeros 9 elementos ordenados 
       createCards(producto);
     })
     .catch((err) => {
@@ -21,13 +21,15 @@ function getProducts() {
 function createCards(products) {
   mainProds.innerHTML = '';
   products.forEach(product => {
+    //console.log(product.title, product.images); comprobar ell contenido.
+    //.substring es para delimitar el texto
     mainProds.insertAdjacentHTML('beforeend', `
       <div class="col-md-4 mb-4">
         <div class="card h-100">
-          <img src="${product.images[0]}" class="card-img-top" alt="${product.title}">
+         <img src="${product.images[1]}" class="card-img-top" alt="${product.title}">
           <div class="card-body d-flex flex-column">
             <h5 class="card-title">${product.title}</h5>
-            <p class="card-text">${product.description.substring(0, 100)}...</p>
+           <p class="card-text">${product.description.substring(0, 100)}...</p> 
             <p class="card-text mt-auto"><strong>$${product.price}</strong></p>
           </div>
         </div>
@@ -36,5 +38,4 @@ function createCards(products) {
   });
 }
 
-// Asociar el evento click al botón
 loadButton.addEventListener("click", getProducts);
